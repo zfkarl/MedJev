@@ -42,10 +42,17 @@ answering 6.04 times faster.
 
 | Model | Backbone | Link |
 | --- | --- | --- |
-| MedJev-4B | Qwen3.5-4B | *released on acceptance* |
+| MedJev-4B | Qwen3.5-4B | [🤗 Karl28/MedJev-4B](https://huggingface.co/Karl28/MedJev-4B) |
 
-A checkpoint is a LoRA adapter plus the marker embeddings and the residual head. `medjev.evaluate`
-merges the adapter before timing, so the reported latency is not inflated by adapter arithmetic.
+```bash
+hf download Karl28/MedJev-4B --local-dir checkpoints/medjev-4b
+bash scripts/evaluate.sh checkpoints/medjev-4b
+```
+
+A checkpoint is a LoRA adapter plus the marker embeddings, the residual head and the three readout
+norms, which is 25,768,961 trained parameters in total. The backbone is not redistributed, so
+`Qwen/Qwen3.5-4B` is downloaded at load time. `medjev.evaluate` merges the adapter before timing, so
+the reported latency is not inflated by adapter arithmetic.
 
 ## 📁 Repository Layout
 

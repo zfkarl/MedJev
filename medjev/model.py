@@ -137,6 +137,12 @@ def attach_lora(model, config, readout):
     for p in readout.head_mlp.parameters():
         p.requires_grad_(True)
         p.data = p.data.float()
+    # get_peft_model freezes everything it did not inject, including the norms the readout
+    # inherits from the matching layer, which the released checkpoint trains at full weight.
+    for norm in (readout.input_layernorm, readout.q_norm, readout.k_norm):
+        for p in norm.parameters():
+            p.requires_grad_(True)
+            p.data = p.data.float()
     return model, targets
 
 

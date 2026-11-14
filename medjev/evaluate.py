@@ -92,6 +92,13 @@ def load_checkpoint(model, readout, path, device):
     head = path / 'head.pt'
     if head.exists():
         readout.head_mlp.load_state_dict(torch.load(head, map_location=device))
+    norms = path / 'readout_norms.pt'
+    if norms.exists():
+        state = torch.load(norms, map_location=device)
+        with torch.no_grad():
+            for name in ('input_layernorm', 'q_norm', 'k_norm'):
+                weight = getattr(readout, name).weight
+                weight.copy_(state[f'{name}.weight'].to(weight.dtype))
     return model
 
 

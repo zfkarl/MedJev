@@ -87,14 +87,20 @@ def train(args):
                       flush=True)
             running = 0
             if step % args.checkpoint_every == 0:
-                save(model, markers, out / f'step{step}')
-    save(model, markers, out / 'final')
+                save(model, readout, markers, out / f'step{step}')
+    save(model, readout, markers, out / 'final')
 
 
-def save(model, markers, path):
+def save(model, readout, markers, path):
+    """Write the adapter and every trained tensor that save_pretrained does not cover."""
     path.mkdir(parents=True, exist_ok=True)
     model.save_pretrained(path)
     torch.save({'markers': markers.markers.detach().cpu()}, path / 'markers.pt')
+    torch.save({k: v.detach().cpu() for k, v in readout.head_mlp.state_dict().items()},
+               path / 'head.pt')
+    torch.save({f'{name}.weight': getattr(readout, name).weight.detach().cpu()
+                for name in ('input_layernorm', 'q_norm', 'k_norm')},
+               path / 'readout_norms.pt')
     print('saved', path, flush=True)
 
 
