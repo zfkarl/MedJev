@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+build/
+dist/
+data/
+runs/
+outputs/
+checkpoints/
+*.jsonl
+*.npz
+*.zip
+.DS_Store
