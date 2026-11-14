@@ -27,18 +27,16 @@ only the correction.
 
 ## 📊 Main Results
 
-Accuracy (%) and mean end-to-end latency (ms) at batch size one on one H20.
+Accuracy (%) and mean end-to-end latency (ms) on the four benchmarks, at batch size one on one H20,
+against 20 off-the-shelf general and medical vision-language models at the 4B to 9B scale.
 
-| Model | HAM10000 | PneumoniaMNIST | MedThinkVQA | PMC-VQA | Avg. | Lat. |
-| --- | --- | --- | --- | --- | --- | --- |
-| Qwen3.5-4B | 58.40 | 92.79 | 36.39 | 56.95 | 61.13 | 685.0 |
-| **MedJev-4B** | **68.39** | **94.23** | **51.94** | **61.68** | **69.06** | **113.4** |
-| Improvement | +9.99 | +1.44 | +15.56 | +4.73 | **+7.93** | **6.04×** |
+<p align="center"><img src="figs/main_results.png" width="100%"></p>
 
 <p align="center"><img src="figs/teaser.png" width="46%"></p>
 
-MedJev-4B is also more accurate and faster than all 20 off-the-shelf general and medical VLMs at the 4B
-to 9B scale that the paper compares against.
+MedJev-4B is the only model in the top-left region: more accurate than every baseline and faster than
+all but the smallest, and it improves the average accuracy of its own backbone by 7.93 points while
+answering 6.04 times faster.
 
 ## 📦 Checkpoints
 
