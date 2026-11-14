@@ -172,10 +172,12 @@ synchronisation. Run it on an idle GPU at batch size one to compare against the 
 
 ## 📚 Citation
 
+If you find MedJev useful, please cite our paper:
+
 ```bibtex
-@inproceedings{medjev2027,
+@inproceedings{zhang2027medjev,
   title     = {{MedJev}: A System One Vision-Language Decision Model for Fast and Effective Medical Image Understanding},
-  author    = {Anonymous},
+  author    = {Fan Zhang},
   booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year      = {2027}
 }
